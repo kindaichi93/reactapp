@@ -4,7 +4,7 @@ import './App.css';
 import 'antd/dist/antd.css';
 import axios from 'axios';
 import { Table, Divider, Tag,Button,Modal } from 'antd';
-
+import WrappedRegistrationForm from "./WrappedRegistrationForm";
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -19,14 +19,12 @@ class App extends React.Component {
         })
     }
     handleOk = e => {
-        console.log(e);
         this.setState({
             showModal: false,
         });
     };
 
     handleCancel = e => {
-        console.log(e);
         this.setState({
             showModal: false,
         });
@@ -78,9 +76,7 @@ class App extends React.Component {
                 onOk={this.handleOk}
                 onCancel={this.handleCancel}
             >
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
+             <WrappedRegistrationForm/>
             </Modal>
         </div>
     );
