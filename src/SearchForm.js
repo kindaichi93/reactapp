@@ -26,17 +26,17 @@ class AdvancedSearchForm extends React.Component {
                     </Col>
                     <Col span={4} key='1' style={{ display: 'block'}}>
                         <Form.Item label={`Name`}>
-                            {getFieldDecorator(`name`)(<Input placeholder="Input Name" />)}
+                            {getFieldDecorator(`name`,{initialValue:''})(<Input placeholder="Input Name" />)}
                         </Form.Item>
                     </Col>
                     <Col span={8} key='2' style={{ display: 'block',width:300 }}>
                         <Form.Item label={`Price`}>
-                            {getFieldDecorator(`price`)(<InputNumber min={1} placeholder="Input Price"/>)}
+                            {getFieldDecorator(`price`,{initialValue:''})(<InputNumber min={1} placeholder="Input Price"/>)}
                         </Form.Item>
                     </Col>
                     <Col span={4} key='3' style={{ display:  'block'  }}>
                         <Form.Item label="Status">
-                            {getFieldDecorator('status')(<Select
+                            {getFieldDecorator('status',{initialValue:''})(<Select
                                 showSearch
                                 placeholder="Select Status"
                                 optionFilterProp="children"

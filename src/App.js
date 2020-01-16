@@ -100,7 +100,11 @@ class App extends React.Component {
             if (err) {
                 return;
             }
-           console.log(values);
+            axios.get('http://5d75320ad5d3ea001425b1ed.mockapi.io/products').then((response) => {
+                this.setState({data:response.data.filter(item => item.name.includes(values.name))});
+            })
+
+
         });
     };
     handleEdit = record => {
