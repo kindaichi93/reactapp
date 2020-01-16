@@ -22,7 +22,9 @@ class AdvancedSearchForm extends React.Component {
         return (
             <Form className="ant-advanced-search-form" onSubmit={onSearch}>
                 <Row gutter={24}>
-                    <Col span={8} key='1' style={{ display: 'block'}}>
+                    <Col span={4} key='0' style={{ display: 'block'}}>
+                    </Col>
+                    <Col span={4} key='1' style={{ display: 'block'}}>
                         <Form.Item label={`Name`}>
                             {getFieldDecorator(`name`)(<Input placeholder="Input Name" />)}
                         </Form.Item>
@@ -32,7 +34,7 @@ class AdvancedSearchForm extends React.Component {
                             {getFieldDecorator(`price`)(<InputNumber min={1} placeholder="Input Price"/>)}
                         </Form.Item>
                     </Col>
-                    <Col span={8} key='3' style={{ display:  'block'  }}>
+                    <Col span={4} key='3' style={{ display:  'block'  }}>
                         <Form.Item label="Status">
                             {getFieldDecorator('status')(<Select
                                 showSearch
@@ -46,6 +48,8 @@ class AdvancedSearchForm extends React.Component {
                                 <Option value="false">False</Option>
                             </Select>)}
                         </Form.Item>
+                    </Col>
+                    <Col span={4} key='0' style={{ display: 'block'}}>
                     </Col>
                 </Row>
                 <Row>
