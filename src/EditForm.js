@@ -35,7 +35,7 @@ const EditForm = Form.create({ name: 'form_in_modal' })(
                         </Form.Item>
                         <Form.Item label="Status">
                             {getFieldDecorator('status',{
-                                initialValue:editData.status !== false ? 'false' : 'true',
+                                initialValue:editData.status === false ? 'false' : 'true',
                                 rules: [{ required: true, message: 'Please input the status' }],
                             })(<Select
                                 showSearch

@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import 'antd/dist/antd.css';
 import axios from 'axios';
-import { Table, Divider, Tag,Button,Modal, Form, Input, Radio,InputNumber ,Select, } from 'antd';
+import { Table, Divider, Tag,Button,Modal, Form, Input, Radio,InputNumber ,Select,Popconfirm,message } from 'antd';
 import CollectionCreateForm from "./CollectionsPage";
 import EditForm from "./EditForm";
 
@@ -43,8 +43,10 @@ class App extends React.Component {
     }
     handleCreate = () => {
         const { form } = this.formRef.props;
+
         form.validateFields((err, values) => {
             if (err) {
+                console.log(err);
                 return;
             }
             let data = this.state.data;
@@ -64,15 +66,23 @@ class App extends React.Component {
             this.setState({ visible: false });
         });
     };
+    refreshPage = ()=>{
+        axios.get('http://5d75320ad5d3ea001425b1ed.mockapi.io/products').then((response)=>{
+            this.setState({
+                data:response.data
+            });
+        })
+    }
     handleEditSubmit = ()=>{
-        const { form } = this.formRef.props;
+        const { form } = this.formRefEdit.props;
         form.validateFields((err, values) => {
             if (err) {
                 return;
             }
-            let {name,price,status} = values;
+            let {name,price} = values;
+            let status = (values.status == 'true');
            axios.put('http://5d75320ad5d3ea001425b1ed.mockapi.io/products/'+values.id,{name,price,status}).then((response)=>{
-               console.log(response.data)
+             this.refreshPage();
            })
             form.resetFields();
             this.setState({ editVisible: false });
@@ -83,19 +93,23 @@ class App extends React.Component {
             this.showEditModal();
         });
     }
-
+    handleDelete = record =>{
+        axios.delete('http://5d75320ad5d3ea001425b1ed.mockapi.io/products/'+record.id).then((response)=>{
+            this.refreshPage();
+            message.success('Delete Success !');
+        })
+    }
+    handleCancelDelete = ()=>{
+        message.error('Cancel Delete');
+    }
     saveFormRef = formRef => {
         this.formRef = formRef;
     };
     editFormRef = editFormRef => {
-      this.formRef=editFormRef;
+      this.formRefEdit=editFormRef;
     };
     componentWillMount() {
-        axios.get('http://5d75320ad5d3ea001425b1ed.mockapi.io/products').then((response)=>{
-            this.setState({
-               data:response.data
-            });
-        })
+       this.refreshPage();
     }
 
     render()
@@ -121,7 +135,7 @@ class App extends React.Component {
             title: 'Status',
             key: 'status',
             dataIndex: 'status',
-            render: text => <span>{!text ? 'true':'false'}</span>,
+            render: text => <span>{ text ? 'true':'false'}</span>,
         },
         {
             title: 'Action',
@@ -130,7 +144,15 @@ class App extends React.Component {
                 <span>
         <a onClick={()=>{this.handleEdit(record)}} >Edit</a>
         <Divider type="vertical" />
-        <a>Delete</a>
+      <Popconfirm
+          title="Are you sure delete this task?"
+          onConfirm={()=>{this.handleDelete(record)}}
+          onCancel={()=>{this.handleCancelDelete()}}
+          okText="Yes"
+          cancelText="No"
+      >
+    <a href="#">Delete</a>
+  </Popconfirm>
       </span>
             ),
         },
@@ -141,7 +163,7 @@ class App extends React.Component {
         <div className="App">
             <h1>Crud Example</h1>
             <Button type="primary" onClick={this.showModal}>
-                New Collection
+                New Product
             </Button>
             <CollectionCreateForm
                 wrappedComponentRef={this.saveFormRef}
