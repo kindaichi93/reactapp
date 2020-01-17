@@ -18,7 +18,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
                     <Form layout="vertical">
                         <Form.Item label="Name">
                             {getFieldDecorator('name', {
-                                rules: [{ required: true, message: 'Please input the title of collection!' }],
+                                rules: [{ required: true, message: 'Please input the name of product' }],
                             })(<Input />)}
                         </Form.Item>
                         <Form.Item label="Price">

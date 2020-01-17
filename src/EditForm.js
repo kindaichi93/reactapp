@@ -24,7 +24,7 @@ const EditForm = Form.create({ name: 'form_in_modal' })(
                         <Form.Item label="Name">
                             {getFieldDecorator('name', {
                                 initialValue:editData.name,
-                                rules: [{ required: true, message: 'Please input the title of collection!' }],
+                                rules: [{ required: true, message: 'Please input the name of product' }],
                             })(<Input  />)}
                         </Form.Item>
                         <Form.Item label="Price">

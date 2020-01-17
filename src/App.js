@@ -110,7 +110,7 @@ class App extends React.Component {
                         if (values.compare =="greater" && values){
                             checkPrice =  (item.price > values.price);
                         }
-                     return    item.name.includes(values.name) && checkPrice && item.status.toString().includes(values.status)
+                     return    item.name.toLowerCase().includes(values.name.toLowerCase()) && checkPrice && item.status.toString().includes(values.status)
                     })
                 });
             })

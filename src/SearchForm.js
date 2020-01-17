@@ -72,9 +72,6 @@ class AdvancedSearchForm extends React.Component {
                         <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>
                             Clear
                         </Button>
-                        <a style={{ marginLeft: 8, fontSize: 12 }} onClick={this.toggle}>
-                            Collapse <Icon type={this.state.expand ? 'up' : 'down'} />
-                        </a>
                     </Col>
                 </Row>
             </Form>
