@@ -101,7 +101,7 @@ class App extends React.Component {
                 return;
             }
             axios.get('http://5d75320ad5d3ea001425b1ed.mockapi.io/products').then((response) => {
-                this.setState({data:response.data.filter(item => item.name.includes(values.name))});
+                this.setState({data:response.data.filter(item => item.name.includes(values.name)&&item.price.toString().includes(values.price)&&item.status.toString().includes(values.status))});
             })
 
 
