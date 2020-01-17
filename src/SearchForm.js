@@ -1,7 +1,8 @@
 
 import React from "react";
-import {Form, Row, Col, Input, Button, Icon, Select, InputNumber} from 'antd';
+import {Form, Row, Col, Input, Button, Icon, Select, InputNumber,} from 'antd';
 const { Option } = Select;
+const InputGroup = Input.Group;
 class AdvancedSearchForm extends React.Component {
     state = {
         expand: false,
@@ -28,11 +29,22 @@ class AdvancedSearchForm extends React.Component {
                         <Form.Item label={`Name`}>
                             {getFieldDecorator(`name`,{initialValue:''})(<Input placeholder="Input Name" />)}
                         </Form.Item>
+
                     </Col>
                     <Col span={8} key='2' style={{ display: 'block',width:300 }}>
+                        <InputGroup compact>
+                            <Form.Item label="Comparison">
+                                {getFieldDecorator('compare',{initialValue:''})(<Select
+                                    showSearch
+                                >
+                                    <Option value="less">&#60;</Option>
+                                    <Option value="greater">&#62;</Option>
+                                </Select>)}
+                            </Form.Item>
                         <Form.Item label={`Price`}>
                             {getFieldDecorator(`price`,{initialValue:''})(<InputNumber min={1} placeholder="Input Price"/>)}
                         </Form.Item>
+                        </InputGroup>
                     </Col>
                     <Col span={4} key='3' style={{ display:  'block'  }}>
                         <Form.Item label="Status">
